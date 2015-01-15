@@ -8,8 +8,8 @@ In order to create the virtual machine, you should:
 
 * install boot2docker
 * run boot2docker
-* *Either:* to run with a project directory solely within the container, in the boot2docker terminal, enter the command `docker run --name openrefine -d -p 3334:3333 psychemedia/openrefine`
-* *Or:* to run with a project directory mounted from a shared folder on the host, in the boot2docker terminal, enter the command `docker run -d -p 3334:3333 -v /path/to/yourSharedDirectory:/mnt/refine --name openrefine psychemedia/openrefine`
+* *Either:* to run with a project directory solely within the container, in the boot2docker terminal, enter the command `docker run --name openrefine -d -p 3334:3333 psychemedia/docker-openrefine`
+* *Or:* to run with a project directory mounted from a shared folder on the host, in the boot2docker terminal, enter the command `docker run -d -p 3334:3333 -v /path/to/yourSharedDirectory:/mnt/refine --name openrefine psychemedia/docker-openrefine`
 
 The port number you will be able to find OpenRefine on is given by the first number set in the flag -p NNNN:3333. To access OpenRefine via port 3334, use `-p 3334:3333` etc.
 
