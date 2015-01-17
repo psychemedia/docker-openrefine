@@ -1,6 +1,8 @@
 # docker-openrefine
 
-Dockerfile for OpenRefine
+Dockerfile for OpenRefine - latest release version (OpenRefine 2.6 beta 1)
+
+(For the latest build from github, see [psychemedia/openrefine](https://registry.hub.docker.com/u/psychemedia/openrefine/))
 
 ## Usage
 
