@@ -2,8 +2,8 @@ Simple container that runs a [Reconcile-CSV](http://okfnlabs.org/reconcile-csv/)
 
 Usage:
 
-* `docker run --name reconmp -p 8001:8000 -d psychemedia/reconcile_ukmps` runs the container against a reference data set of information about UK MPs
-* `docker run --name recon2 -p 8001:8000 -v /path/to/mydir:/tmp/import -d psychemedia/reconcile_ukmps sh -c 'java -jar reconcile-csv-0.1.1.jar /tmp/import/MYFILE.csv SEARCHCOL IDCOL'` will run the service against */path/to/mydir/MYFILE.csv* with identifiers in *IDCOL* and the fuzzy search targets in *SEARCHCOL*.
+* `docker run --name reconmp -p 8001:8000 -d psychemedia/docker-reconciliation` runs the container against a reference data set of information about UK MPs
+* `docker run --name recon2 -p 8001:8000 -v /path/to/mydir:/tmp/import -d psychemedia/docker-reconciliation sh -c 'java -jar reconcile-csv-0.1.1.jar /tmp/import/MYFILE.csv SEARCHCOL IDCOL'` will run the service against */path/to/mydir/MYFILE.csv* with identifiers in *IDCOL* and the fuzzy search targets in *SEARCHCOL*.
 
 Then eg `boot2docker ip` to get the IP address of the service - eg *http://192.168.59.103* then the service endpoint is at *http://192.168.59.103:8001/reconcile*. Test with eg *http://192.168.59.103:8001/reconcile?query=David Cameroon*
 
