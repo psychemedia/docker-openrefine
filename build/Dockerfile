@@ -3,10 +3,7 @@ FROM ubuntu:trusty
 MAINTAINER tony.hirst@gmail.com
 
 # Install Headless JRE after updating installed packages.
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install -y wget ant unzip openjdk-7-jdk
-RUN apt-get clean
+RUN apt-get update && apt-get install -y wget ant unzip openjdk-7-jdk && apt-get clean
 
 #Build OpenRefine
 RUN wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/archive/master.zip
