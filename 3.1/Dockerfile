@@ -12,8 +12,15 @@ EXPOSE 3333
 CMD openrefine-$RELEASE/refine -i 0.0.0.0 -d /mnt/refine
 
 #Reference:
+
+#Build with default version
+#docker build -t psychemedia/openrefinedemo .
+
+#Build with a specific version
+#docker build -t psychemedia/openrefinedemo --build-arg RELEASE=3.1-beta .
+
 ##to peek inside the container:
-# docker run -i -t psychemedia/openrefinetest /bin/bash
+# docker run -i -t psychemedia/openrefinedemo /bin/bash
 
 ##to run:
 # docker run --rm -d -p 3333:3333 --name openrefine psychemedia/openrefinedemo
