@@ -1,5 +1,9 @@
-FROM maven:3.6.0-jdk-8-alpine
+#We don't need the full JDK; JRE is plenty
+FROM openjdk:8-jre-alpine
 MAINTAINER tony.hirst@gmail.com
+
+#Download a couple of required packages
+RUN apk update && apk add --no-cache wget bash
 
 ARG RELEASE=3.1
 ENV RELEASE=$RELEASE
