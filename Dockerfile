@@ -21,10 +21,7 @@ RUN pip3 install \
 ARG RELEASE=3.1
 ENV RELEASE=$RELEASE
 
-RUN wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/releases/download/$RELEASE/openrefine-linux-$RELEASE.tar.gz
-RUN tar -xzf openrefine-linux-3.1.tar.gz  && rm openrefine-linux-$RELEASE.tar.gz
-RUN mkdir /mnt/refine
-VOLUME /mnt/refine
+
 #EXPOSE 3333
 #CMD openrefine-$RELEASE/refine -i 0.0.0.0 -d /mnt/refine
 
@@ -33,6 +30,11 @@ RUN useradd -m jovyan
 ENV HOME=/home/jovyan
 WORKDIR $HOME
 USER jovyan
+
+RUN wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/releases/download/$RELEASE/openrefine-linux-$RELEASE.tar.gz
+RUN tar -xzf openrefine-linux-3.1.tar.gz  && rm openrefine-linux-$RELEASE.tar.gz
+RUN mkdir /mnt/refine
+VOLUME /mnt/refine
 
 COPY --chown=jovyan:jovyan entrypoint.sh /home/jovyan
 RUN mkdir -p /home/jovyan/refine
