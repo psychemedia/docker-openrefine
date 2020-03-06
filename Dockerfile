@@ -35,12 +35,12 @@ WORKDIR $HOME
 USER jovyan
 
 COPY --chown=jovyan:jovyan entrypoint.sh /home/jovyan
-
+RUN mkdir -p /home/jovyan/refine
 EXPOSE 8888
 
 ENTRYPOINT ["/home/jovyan/entrypoint.sh"]
 
-CMD ["jhsingle-native-proxy", "openrefine-$RELEASE/refine", "{-i}", "0.0.0.0", "{-p}", "{port}", "{-}d", "/mnt/refine", "--port", "8888"]
+CMD ["jhsingle-native-proxy", "openrefine-$RELEASE/refine", "{-i}", "0.0.0.0", "{-p}", "{port}", "{-}d", "/home/jovyan/refine", "--port", "8888"]
 
 #Reference:
 
