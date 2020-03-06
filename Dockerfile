@@ -1,16 +1,30 @@
-FROM ubuntu:trusty
-
+#We don't need the full JDK; JRE is plenty
+FROM openjdk:8-jre-alpine
 MAINTAINER tony.hirst@gmail.com
 
-# Install Headless JRE after updating installed packages.
-RUN apt-get update && apt-get install -y openjdk-7-jre-headless wget
-RUN apt-get clean
+#Download a couple of required packages
+RUN apk update && apk add --no-cache wget bash
 
-RUN wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/releases/download/2.6-beta.1/openrefine-linux-2.6-beta.1.tar.gz 
+ARG RELEASE=3.1
+ENV RELEASE=$RELEASE
 
-RUN tar -xzf openrefine-linux-2.6-beta.1.tar.gz  && rm openrefine-linux-2.6-beta.1.tar.gz
-
-
-EXPOSE 3333
+RUN wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/releases/download/$RELEASE/openrefine-linux-$RELEASE.tar.gz
+RUN tar -xzf openrefine-linux-$RELEASE.tar.gz  && rm openrefine-linux-$RELEASE.tar.gz
 RUN mkdir /mnt/refine
-CMD ["openrefine-2.6-beta.1/refine", "-i", "0.0.0.0", "-d", "/mnt/refine"]
+VOLUME /mnt/refine
+EXPOSE 3333
+CMD openrefine-$RELEASE/refine -i 0.0.0.0 -d /mnt/refine
+
+#Reference:
+
+#Build with default version
+#docker build -t psychemedia/openrefinedemo .
+
+#Build with a specific version
+#docker build -t psychemedia/openrefinedemo --build-arg RELEASE=3.1-beta .
+
+##to peek inside the container:
+# docker run -i -t psychemedia/openrefinedemo /bin/bash
+
+##to run:
+# docker run --rm -d -p 3333:3333 --name openrefine psychemedia/openrefinedemo
