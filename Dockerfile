@@ -1,11 +1,16 @@
 #We don't need the full JDK; JRE is plenty
-FROM openjdk:8-jre-alpine
+FROM openjdk:8-jre
 MAINTAINER tony.hirst@gmail.com
 
 #Download a couple of required packages
-RUN apk update && apk add --no-cache wget bash
+RUN apt-get update && apt-get install -y --no-install-recommends wget bash
 
-RUN apk add --no-cache python3 py-pip
+RUN apt-get install -y --no-install-recommends \
+    python3.7 \	
+    python3-pip \	
+    && \	
+    apt-get clean && \	
+    rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install \
     jupyterhub \
