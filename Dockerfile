@@ -14,7 +14,7 @@ RUN apt-get install -y --no-install-recommends \
 
 RUN pip3 install \
     jupyterhub \
-    jhsingle-native-proxy>=0.0.9 \
+    git+https://github.com/ideonate/jhsingle-native-proxy.git \
     streamlit
 
 ARG RELEASE=3.1
