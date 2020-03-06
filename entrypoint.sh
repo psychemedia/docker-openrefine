@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#!/bin/bash
+
 # For a command line such as:
 # "/home/jovyan/entrypoint.sh jupyter notebook --ip 0.0.0.0 --port 59537 --NotebookApp.custom_display_url=http://127.0.0.1:59537"
 # strip out most args, just pass on the port
@@ -31,9 +33,9 @@ do
     fi
 done
 
-destport=$((port + 1))
 
-echo "Using internal port $destport"
+base_url=$JUPYTERHUB_SERVICE_PREFIX
 
+#voila /home/jovyan/Presentation.ipynb --port=${port} --no-browser --Voila.base_url=${base_url}
 #jhsingle-native-proxy --destport $destport --authtype none streamlit hello {--}server.port {port} {--}server.headless True {--}server.enableCORS False --port $port
-jhsingle-native-proxy --destport $destport --authtype none openrefine-3.1/refine {-i} 0.0.0.0 {-p} {port} {-}d /home/jovyan/refine --port $port
+openrefine-3.1/refine -i 0.0.0.0 -p {port} -d /home/jovyan/refine
