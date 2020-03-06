@@ -42,7 +42,7 @@ EXPOSE 8888
 
 ENTRYPOINT ["/home/jovyan/entrypoint.sh"]
 
-CMD ["jhsingle-native-proxy", "openrefine-3.1/refine", "{-i}", "0.0.0.0", "{-p}", "{port}", "{-}d", "/home/jovyan/refine", "--port", "8888"]
+CMD ["jhsingle-native-proxy", "/home/jovyan/openrefine-3.1/refine", "{-i}", "0.0.0.0", "{-p}", "{port}", "{-}d", "/home/jovyan/refine", "--port", "8888"]
 
 #Reference:
 
