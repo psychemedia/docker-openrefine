@@ -38,4 +38,4 @@ base_url=$JUPYTERHUB_SERVICE_PREFIX
 
 #voila /home/jovyan/Presentation.ipynb --port=${port} --no-browser --Voila.base_url=${base_url}
 #jhsingle-native-proxy --destport $destport --authtype none streamlit hello {--}server.port {port} {--}server.headless True {--}server.enableCORS False --port $port
-openrefine-3.1/refine -i 0.0.0.0 -p {port} -d /home/jovyan/refine
+/home/jovyan/openrefine-3.1/refine -i 0.0.0.0 -p {port} -d /home/jovyan/refine
