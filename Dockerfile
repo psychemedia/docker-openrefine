@@ -5,6 +5,18 @@ MAINTAINER tony.hirst@gmail.com
 #Download a couple of required packages
 RUN apk update && apk add --no-cache wget bash
 
+RUN apt-get install -y --no-install-recommends \
+    python3.7 \
+    python3-pip \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install \
+    jupyterhub \
+    jhsingle-native-proxy>=0.0.9 \
+    streamlit
+
 ARG RELEASE=3.1
 ENV RELEASE=$RELEASE
 
@@ -12,8 +24,22 @@ RUN wget --no-check-certificate https://github.com/OpenRefine/OpenRefine/release
 RUN tar -xzf openrefine-linux-$RELEASE.tar.gz  && rm openrefine-linux-$RELEASE.tar.gz
 RUN mkdir /mnt/refine
 VOLUME /mnt/refine
-EXPOSE 3333
-CMD openrefine-$RELEASE/refine -i 0.0.0.0 -d /mnt/refine
+#EXPOSE 3333
+#CMD openrefine-$RELEASE/refine -i 0.0.0.0 -d /mnt/refine
+
+# create a user, since we don't want to run as root
+RUN useradd -m jovyan
+ENV HOME=/home/jovyan
+WORKDIR $HOME
+USER jovyan
+
+COPY --chown=jovyan:jovyan entrypoint.sh /home/jovyan
+
+EXPOSE 8888
+
+ENTRYPOINT ["/home/jovyan/entrypoint.sh"]
+
+CMD ["jhsingle-native-proxy", "openrefine-$RELEASE/refine", "{-i}", "0.0.0.0", "{-p}", "{port}", "{-}d", "/mnt/refine", "--port", "8888"]
 
 #Reference:
 
