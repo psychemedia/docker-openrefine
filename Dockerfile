@@ -5,7 +5,7 @@ MAINTAINER tony.hirst@gmail.com
 #Download a couple of required packages
 RUN apk update && apk add --no-cache wget bash
 
-RUN apk add --no-cache python3.7 py-pip
+RUN apk add --no-cache python3 py-pip
 
 RUN pip3 install \
     jupyterhub \
