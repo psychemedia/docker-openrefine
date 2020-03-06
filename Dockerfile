@@ -3,7 +3,7 @@ FROM openjdk:8-jre
 MAINTAINER tony.hirst@gmail.com
 
 #Download a couple of required packages
-RUN apt-get update && apt-get install -y --no-install-recommends wget bash
+RUN apt-get update && apt-get install -y --no-install-recommends wget bash git
 
 RUN apt-get install -y --no-install-recommends \
     python3.7 \	
@@ -14,8 +14,7 @@ RUN apt-get install -y --no-install-recommends \
 
 RUN pip3 install \
     jupyterhub \
-    git+https://github.com/ideonate/jhsingle-native-proxy.git \
-    streamlit
+    git+https://github.com/ideonate/jhsingle-native-proxy.git
 
 ARG RELEASE=3.1
 ENV RELEASE=$RELEASE
